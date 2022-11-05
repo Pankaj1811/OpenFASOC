@@ -192,18 +192,18 @@ The gds and lef files of HEADER and SLC cells are pre-created before the start o
 The layout of the HEADER cell is shown below:
 
 <p align="center">
-  <img src="/images/of1.png">
+  <img src="/images/new1.png">
 </p><br>
 
 The layout of the SLC cell is shown below:
 
 <p align="center">
-  <img src="/images/of2.png">
+  <img src="/images/new2.png">
 </p><br>
 
 # OpenFASOC Flow
 <p align="center">
-  <img src="/images/of3.png">
+  <img src="/images/new3.png">
 </p><br>
 
 The generator must first parse the user’s requirements into a high-level circuit description or verilog. User input parsing is implemented by reading from a JSON spec file directly in the temp-sense-gen repository. The JSON allows for specifying power, area, maximum error (temperature result accuracy),
@@ -220,7 +220,7 @@ produced by substituting specifics into several template verilog files.
 The test.json file shown in the below screenshot corresponds to the temp_sense_gen.
 
 <p align="center">
-  <img src="/images/of4.png">
+  <img src="/images/new4.png">
 </p><br>
 
 In the test.json file, only the temperature can be modified and the range of temperature should always be between –20C to 100C. Based on the operating temperature range, generator calculates the number of header and inverters to minimize the error. 
@@ -233,7 +233,7 @@ make sky130hd_temp_verilog
 The generator references the model file in an iterative process until either meeting specifications or failing.
 
 <p align="center">
-  <img src="/images/of5.png">
+  <img src="/images/new5.png">
 </p><br>
 
 As shown in the above picture, the tool is trying to minimize the error iteratively, by varying the number of inverters and headers for the given temperature range.
@@ -241,25 +241,50 @@ As shown in the above picture, the tool is trying to minimize the error iterativ
 #### Results 
 For temperature Range –20C to 100C, the error and inverters and headers are given below:
 <p align="center">
-  <img src="/images/of6.png">
+  <img src="/images/new6.png">
 </p><br>
 
 For temperature Range 30C to 100C, the error and inverters and headers are given below:
 <p align="center">
-  <img src="/images/of7.png">
+  <img src="/images/new7.png">
 </p><br>
 
 #### Directories where the resulting verilog is Created:
 The screenshot of the files created before and after is given below:
 #### After
 <p align="center">
-  <img src="/images/of8.png">
+  <img src="/images/new8.png">
 </p><br>
 
 #### Before
 <p align="center">
-  <img src="/images/of9.png">
+  <img src="/images/new9.png">
 </p><br>
 
 Here, using the generic template, extra blocks of counter, TEMP_ANALOG_hv.nl.v, TEMP_ANALOG_lv.nl.v
 are created in the src folder.
+
+## Contributors
+
+- **Pankaj Agrawal**
+- **Kunal Ghosh**
+- **Tejas B N**
+- **Ajay**
+- **Aditya Singh**
+
+
+## Acknowledgments
+
+
+- Kunal Ghosh, Director, VSD Corp. Pvt. Ltd.
+- Madhav Rao, Associate Professor, IIIT Bangalore
+- V N Muralidhara, Associate Professor, IIIT Bangalore
+
+
+## Contact Information
+
+- Pankaj Agrawal, Postgraduate Student, International Institute of Information Technology, Bangalore  1811pankajagrawal@gmail.com
+- Kunal Ghosh, Director, VSD Corp. Pvt. Ltd. kunalghosh@gmail.com
+- Tejas B N, Postgraduate Student, International Institute of Information Technology, Bangalore  bntejas@gmail.com
+- Aditya Singh, Postgraduate Student, International Institute of Information Technology, Bangalore
+- Ajay, Postgraduate Student, International Institute of Information Technology, Bangalore
