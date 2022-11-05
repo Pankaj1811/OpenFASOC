@@ -161,7 +161,7 @@ The way that works is we have a subthreshold current that has an exponential dep
 
 **Block Architecture**
 <p align="center">
-  <img src="/images/temp_sense_io.png">
+  <img src="/images/temp_sens_io.png">
 </p><br>
 
  _Inputs_
