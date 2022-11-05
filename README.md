@@ -4,6 +4,34 @@ OpenFASoC is a project focused on automated analog generation from user specific
 The tool is comprised of analog and mixed-signal circuit generators, which automatically create a physical design based on user specifications.
 See more about this at this [Site](https://fasoc.engin.umich.edu/)
 
+
+# Prerequisites
+****************
+
+Install all the prerequisites using `dependencies.sh` script provided in the home location of this project (where this readme.rst file is found). Supports CentOS7 and Ubuntu20.
+
+
+(Or) Please install the following tools by building the tools manually from their code base with the recommended commit ids for a stable functioning of the flow:
+
+  1. `Magic <https://github.com/RTimothyEdwards/magic>`_ (version:8.3.334)
+
+  2. `Netgen <https://github.com/RTimothyEdwards/netgen>`_ (version:1.5.240)
+
+  3. `Klayout <https://github.com/KLayout/klayout>`_ (version:0.27.10-1)
+
+      - Please use this command to build preferably: `./build.sh -option '-j8' -noruby -without-qt-multimedia -without-qt-xml -without-qt-svg`
+
+
+  4. `Yosys <https://github.com/The-OpenROAD-Project/yosys>`_ (version:0.22+70)
+
+  5. `OpenROAD <https://github.com/The-OpenROAD-Project/OpenROAD>`_ (version:2.0_5525)
+
+  6. `Open_pdks <https://github.com/RTimothyEdwards/open_pdks>`_ (version:1.0.353)
+
+   - open_pdks is required to run drc/lvs check and the simulations
+   - After open_pdks is installed, please update the **open_pdks** key in `common/platform_config.json` with the installed path, down to the sky130A folder
+
+
 # Installation
 ## 1. OpenFASOC:
 The command used to install OpenFASOC are 
@@ -120,6 +148,32 @@ sudo make install
 type `magic` terminal to check whether it installed succesfully or not. Type `exit` to exit magic.
 
 # Temperature Sensor Generator
+
+An all-digital temperature sensor, that relies on a new subthreshold oscillator (achieved using the auxiliary cell “Header Cell“) for realizing synthesizable thermal sensors.
+
+The way that works is we have a subthreshold current that has an exponential dependency on the temperature, the frequency generated from the subthreshold ring oscillator is also dependent on temperature. So we can sense the temperature by comparing the difference between the clock frequency generated from a reference oscillator and the clock frequency from the proposed frequency generator.
+
+## Temperature Sensor Description
+
+**User Specs**
+* Temperature sensing range: -20⁰C – 125⁰C
+* Frequency range of operation: 100Hz – 10MHz
+
+**Block Architecture**
+<p align="center">
+  <img src="/images/temp_sense_io.png">
+</p><br>
+
+ _Inputs_
+ *  CLK_REF: System clock taken from input.
+ *  RESET_COUNTERn: Input signal to reset the module initial state.
+
+ * SEL_CONV_TIME: Four bit input used to select how many times the 1 bit of the output DOUT is fractionated (0-16).
+
+_Outputs_
+ *  DOUT:  The output voltage whose frequency is dependent on temperature.
+ *  DONE: Validity signal for DOUT
+ 
 Circuit
 -------
 This generator creates a compact mixed-signal temperature sensor based on the topology from this [paper](https://ieeexplore.ieee.org/document/9816083).
