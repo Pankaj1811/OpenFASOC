@@ -16,7 +16,7 @@ See more about this at this [Site](https://fasoc.engin.umich.edu/)
 
 ## Working
 <p align="center">
-  <img src="/images/temp_sens_io.png">
+  <img src="/images/counter.png">
 </p><br>
 
 # Prerequisites
