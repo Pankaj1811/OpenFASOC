@@ -7,7 +7,7 @@ See more about this at this [Site](https://fasoc.engin.umich.edu/)
 # FREQUENCY TO DIGITAL CONVERTER (COUNTER)
 ## Inputs
 1) Reference clock
-2) Clock generated from SLC(Split Level Controller)
+2) Clock generated from SLC(Split Control Level Controller)
 3) Reset for Resettng the counter to zero
 
 ## Outputs
@@ -18,6 +18,8 @@ See more about this at this [Site](https://fasoc.engin.umich.edu/)
 <p align="center">
   <img src="/images/counter.png">
 </p><br>
+
+It takes the clock generated from the SLC and compares it with the reference clock and on the basis of this it generate 24 bit output. 
 
 # Prerequisites
 ****************
