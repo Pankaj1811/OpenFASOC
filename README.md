@@ -4,6 +4,20 @@ OpenFASoC is a project focused on automated analog generation from user specific
 The tool is comprised of analog and mixed-signal circuit generators, which automatically create a physical design based on user specifications.
 See more about this at this [Site](https://fasoc.engin.umich.edu/)
 
+# FREQUENCY TO DIGITAL CONVERTER (COUNTER)
+## Inputs
+1) Reference clock
+2) Clock generated from SLC(Split Level Controller)
+3) Reset for Resettng the counter to zero
+
+## Outputs
+1) Dout
+2) 24 bit output
+
+## Working
+<p align="center">
+  <img src="/images/temp_sens_io.png">
+</p><br>
 
 # Prerequisites
 ****************
@@ -189,22 +203,8 @@ The physical implementation of the analog blocks in the circuit is done using tw
 2. SLC cell, containing the Split-Control Level Converter.
 
 The gds and lef files of HEADER and SLC cells are pre-created before the start of the Generator flow.
-The layout of the HEADER cell is shown below:
-
-<p align="center">
-  <img src="/images/new1.png">
-</p><br>
-
-The layout of the SLC cell is shown below:
-
-<p align="center">
-  <img src="/images/new2.png">
-</p><br>
 
 # OpenFASOC Flow
-<p align="center">
-  <img src="/images/new3.png">
-</p><br>
 
 The generator must first parse the user’s requirements into a high-level circuit description or verilog. User input parsing is implemented by reading from a JSON spec file directly in the temp-sense-gen repository. The JSON allows for specifying power, area, maximum error (temperature result accuracy),
 an optimization option (to choose which option to prioritize), and an operating temperature range (minimum and maximum operating temperature values).
@@ -216,12 +216,7 @@ produced by substituting specifics into several template verilog files.
 
 ## Case Study: Temp_Sensor
 
-### 1. Verilog Files geneartion and dir? User specs, iterative approach and generated verilog files
-The test.json file shown in the below screenshot corresponds to the temp_sense_gen.
-
-<p align="center">
-  <img src="/images/new4.png">
-</p><br>
+### 1. Verilog Files geneartion and dir? User specs, iterative approach and generated verilog files.
 
 In the test.json file, only the temperature can be modified and the range of temperature should always be between –20C to 100C. Based on the operating temperature range, generator calculates the number of header and inverters to minimize the error. 
 
@@ -232,34 +227,6 @@ make sky130hd_temp_verilog
 
 The generator references the model file in an iterative process until either meeting specifications or failing.
 
-<p align="center">
-  <img src="/images/new5.png">
-</p><br>
-
-As shown in the above picture, the tool is trying to minimize the error iteratively, by varying the number of inverters and headers for the given temperature range.
-
-#### Results 
-For temperature Range –20C to 100C, the error and inverters and headers are given below:
-<p align="center">
-  <img src="/images/new6.png">
-</p><br>
-
-For temperature Range 30C to 100C, the error and inverters and headers are given below:
-<p align="center">
-  <img src="/images/new7.png">
-</p><br>
-
-#### Directories where the resulting verilog is Created:
-The screenshot of the files created before and after is given below:
-#### After
-<p align="center">
-  <img src="/images/new8.png">
-</p><br>
-
-#### Before
-<p align="center">
-  <img src="/images/new9.png">
-</p><br>
 
 Here, using the generic template, extra blocks of counter, TEMP_ANALOG_hv.nl.v, TEMP_ANALOG_lv.nl.v
 are created in the src folder.
