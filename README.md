@@ -15,9 +15,7 @@ See more about this at this [Site](https://fasoc.engin.umich.edu/)
 2) 24 bit output
 
 ## Working
-<p align="center">
-  <img src="/images/counter.png">
-</p><br>
+
 
 It takes the clock generated from the SLC and compares it with the reference clock and on the basis of this it generate 24 bit output. 
 
@@ -176,9 +174,6 @@ The way that works is we have a subthreshold current that has an exponential dep
 * Frequency range of operation: 100Hz – 10MHz
 
 **Block Architecture**
-<p align="center">
-  <img src="/images/temp_sens_io.png">
-</p><br>
 
  _Inputs_
  *  CLK_REF: System clock taken from input.
